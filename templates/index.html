@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="static/style.css">
+  <script src="index.js"></script>
+</head>
+<body>
+  <div class="form-container">
+    <form class="form-box">
+      <h2>Registration Form</h2>
+
+      <label>Full Name:</label>
+      <input type="text" placeholder="Enter your name" required>
+
+      <label>Email:</label>
+      <input type="email" placeholder="Enter your email" required>
+
+      <label>Password:</label>
+      <input type="password" placeholder="Enter password" required>
+
+      <label>Confirm Password:</label>
+      <input type="password" placeholder="Confirm password" required>
+
+      <label>Gender:</label>
+      <div class="radio-group">
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+        <input type="radio" name="gender" value="other"> Other
+      </div>
+      <label>Hobbies:</label>
+      <div class="checkbox-group">
+        <input type="checkbox" value="reading"> Reading
+        <input type="checkbox" value="traveling"> Traveling
+        <input type="checkbox" value="gaming"> Gaming
+      </div>
+
+      <label>Country:</label>
+      <select>
+        <option value="india">India</option>
+        <option value="usa">USA</option>
+        <option value="uk">UK</option>
+        <option value="other">Other</option>
+      </select>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+  <script>
+    document.querySelector("form").addEventListener("submit", function(e) {
+      e.preventDefault(); // Stop form from submitting to server
+  
+      // Get form values
+      const name = document.querySelector('input[type="text"]').value;
+      const email = document.querySelector('input[type="email"]').value;
+      const gender = document.querySelector('input[name="gender"]:checked')?.value;
+      const hobbies = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
+      const country = document.querySelector('select').value;
+  
+      // Store in localStorage
+      const data = { name, email, gender, hobbies, country };
+      localStorage.setItem("registrationData", JSON.stringify(data));
+  
+      alert("Details stored!");
+    });
+  </script>
+  
+</body>
+</html>
